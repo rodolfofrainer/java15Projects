@@ -3,25 +3,18 @@ package calculator;
 import javax.swing.*;
 
 public class Button extends JButton{
-    String message;
     int gridSize;
+    int buttonHeight;
+    int[] position;
 
-    public int getGridSize() {
-        return gridSize;
-    }
-
-
-    public String getMessage() {
-        return message;
-    }
-
-    public void setGridSize(int gridSize) {
+    public Button(String text, int gridSize, int buttonHeight, int[] position) {
+        super(text);
         this.gridSize = gridSize;
-        //setBounds(x,y,size,size);
-    }
-    public void setMessage(String message) {
-        this.message = message;
-        setText(message);
+        this.buttonHeight = buttonHeight*gridSize;
+        this.position = position;
     }
 
+    public void setBounds(){
+        setBounds(this.position[0], this.position[1], this.gridSize, this.buttonHeight);
+    }
 }

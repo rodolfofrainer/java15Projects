@@ -1,8 +1,6 @@
 package calculator;
 
 import javax.swing.*;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 
 public class Calculator {
     public static void main(String[] args) {
@@ -19,20 +17,14 @@ public class Calculator {
         textArea.setEditable(false);
 
 
-        Button button = new Button();
-        button.setMessage("%");
+        Button button = new Button("/", gridSize, 1, new int[]{PADDING, HEIGHT/9+ PADDING*2});
+        button.setBounds();
 
-        textArea.setBounds(PADDING, PADDING, WIDTH-PADDING*3, HEIGHT/8);
-        button.setBounds(PADDING, PADDING, gridSize, gridSize);
+        textArea.setBounds(PADDING, PADDING, WIDTH-PADDING*3, HEIGHT/9);
 
-        button.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
+        button.addActionListener(e -> textArea.append(button.getText()));
 
-            }
-        });
-
-//        frame.getContentPane().add(button);
+        frame.getContentPane().add(button);
         frame.getContentPane().add(textArea);
         frame.setVisible(true);
     }
