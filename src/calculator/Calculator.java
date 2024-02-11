@@ -1,38 +1,55 @@
 package calculator;
 
 import javax.swing.*;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
 
 public class Calculator {
     final static int PADDING = 5;
-    final static int WIDTH = 420 + PADDING*2;
-    final static int HEIGHT = 600 + PADDING*2;
+    final static int WIDTH = 425 + PADDING*2;
+    final static int HEIGHT = 550 + PADDING*2;
     final static int gridSize = 100;
     public static void main(String[] args) {
 
         JFrame frame = createFrame();
 
         JTextArea textArea = createTextArea();
-
-        Button divisonButton = new Button("÷", gridSize, 1, new int[]{0, 1});
-        Button multiplicationButton = new Button("X", gridSize, 1, new int[]{1, 1});
-        Button minusButton = new Button("-", gridSize, 1, new int[]{2, 1});
-        Button plussButton = new Button("+", gridSize, 1, new int[]{3, 1});
-        Button equalButton = new Button("=", gridSize, 4, new int[]{3, 2});
-
-
-        frame.getContentPane().add(divisonButton);
-        frame.getContentPane().add(multiplicationButton);
-        frame.getContentPane().add(minusButton);
-        frame.getContentPane().add(plussButton);
-        frame.getContentPane().add(equalButton);
         frame.getContentPane().add(textArea);
         frame.setVisible(true);
 
+        ArrayList<Button> buttons = populateButtons();
+        for(Button button:buttons){
+        frame.getContentPane().add(button);
+        button.addActionListener(e -> textArea.append(button.getText()));
+        }
 
-        divisonButton.addActionListener(e -> textArea.append(divisonButton.getText()));
+    }
+
+
+    private static ArrayList<Button> populateButtons() {
+        //Create array with app buttons
+        ArrayList<Button> buttons = new ArrayList<>();
+        List<String> buttonsLabels = Arrays.asList("÷", "x","-","7","8","9","4","5","6","1","2","3","=","+");
+
+        for (int i = 0; i < buttonsLabels.size(); i++) {
+            int row = i / 3; // Calculate the row index
+            int col = i % 3; // Calculate the column index
+
+            if (buttonsLabels.get(i).equals("=")) {
+                buttons.add(new Button("=", gridSize, 3, new int[]{3,2}));
+            } else if (buttonsLabels.get(i).equals("+")) {
+                buttons.add(new Button("+", gridSize, 1, new int[]{3,1}));
+            } else {
+                buttons.add(new Button(buttonsLabels.get(i), gridSize, 1, new int[]{col, row+1}));
+            }
+        }
+
+        return buttons;
     }
 
     private static JFrame createFrame() {
+        //Create app window
         JFrame frame = new JFrame("Calculator");
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         frame.setSize(WIDTH+PADDING*2,HEIGHT+PADDING*2);
@@ -41,6 +58,7 @@ public class Calculator {
     }
 
     private static JTextArea createTextArea() {
+        //Create app white bar for input
         JTextArea textArea = new JTextArea();
         textArea.setEditable(false);
         textArea.setBounds(PADDING, PADDING, WIDTH-PADDING*3, gridSize-PADDING);
