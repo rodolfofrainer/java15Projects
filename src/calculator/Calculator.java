@@ -1,6 +1,7 @@
 package calculator;
 
 import javax.swing.*;
+import java.awt.*;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
@@ -10,20 +11,34 @@ public class Calculator {
     final static int WIDTH = 425 + PADDING*2;
     final static int HEIGHT = 650 + PADDING*3;
     final static int GRID_SIZE = 100;
+
+    float first_value;
+    float second_value = 1.0f;
+    char operator;
+
     public static void main(String[] args) {
 
-        JFrame frame = createFrame();
 
+        // create frame and text area
+        JFrame frame = createFrame();
         JTextArea textArea = createTextArea();
         frame.getContentPane().add(textArea);
         frame.setVisible(true);
 
+        //populate buttons
         ArrayList<Button> buttons = populateButtons();
         for(Button button:buttons){
         frame.getContentPane().add(button);
-        button.addActionListener(e -> textArea.append(button.getText()));
+
+        //add actionListener
+
+        button.addActionListener(e -> getButtonAction(button, textArea));
         }
 
+    }
+
+    private static void getButtonAction(Button button, JTextArea textArea) {
+        textArea.append(button.getText());
     }
 
 
@@ -37,7 +52,6 @@ public class Calculator {
             int row = i / 3;
             int col = i % 3;
 
-            // Adjust the indices for special buttons
             if (i >= buttonsLabels.size() - 3) {
                 row = numRows - 2;
                 col = i - (buttonsLabels.size() - 3);
@@ -68,6 +82,7 @@ public class Calculator {
         //Create app white bar for input
         JTextArea textArea = new JTextArea();
         textArea.setEditable(false);
+        textArea.setFont(new Font(textArea.getFont().getName(), textArea.getFont().getStyle(), 25));
         textArea.setBounds(PADDING, PADDING, WIDTH-PADDING*3, GRID_SIZE -PADDING);
         return textArea;
     }
