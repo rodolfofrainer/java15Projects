@@ -12,13 +12,10 @@ public class Calculator {
     final static int HEIGHT = 650 + PADDING*3;
     final static int GRID_SIZE = 100;
 
-    float first_value;
-    float second_value = 1.0f;
-    char operator;
+    static float[] operationValues= {0.0f, 1.0f};
+    char operationOperator;
 
     public static void main(String[] args) {
-
-
         // create frame and text area
         JFrame frame = createFrame();
         JTextArea textArea = createTextArea();
@@ -37,8 +34,13 @@ public class Calculator {
 
     }
 
-    private static void getButtonAction(Button button, JTextArea textArea) {
-        textArea.append(button.getText());
+    private static void getButtonAction(Button buttonPressed, JTextArea textArea) {
+        List<String> operators = Arrays.asList("÷", "x","-","+");
+        if(operators.contains(buttonPressed.getText())){
+            operationValues[0] = Float.parseFloat(textArea.getText());
+            System.out.println(operationValues[0]);
+        }
+        textArea.append(buttonPressed.getText());
     }
 
 
