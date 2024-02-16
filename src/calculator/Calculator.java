@@ -27,7 +27,6 @@ public class Calculator {
         frame.getContentPane().add(button);
 
         //add actionListener
-
         button.addActionListener(e -> getButtonAction(button, textArea));
         }
 
@@ -35,9 +34,9 @@ public class Calculator {
 
     private static void getButtonAction(Button buttonPressed, JTextArea textArea) {
         List<String> operators = Arrays.asList("÷", "x","-","+");
-
         String equalSign = "=";
 
+        // check if equalSign button was pressed
         if(!equalSign.equals(buttonPressed.getText())){
             textArea.append(buttonPressed.getText());
         } else{

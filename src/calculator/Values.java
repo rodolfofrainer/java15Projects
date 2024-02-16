@@ -3,16 +3,7 @@ package calculator;
 public class Values {
     float firstValue =Float.NaN;
     float secondValue =Float.NaN;
-    float result;
     String operation;
-
-    public float getResult() {
-        return result;
-    }
-
-    public void setResult(float result) {
-        this.result = result;
-    }
 
     public float getFirstValue() {
         return firstValue;
@@ -41,20 +32,13 @@ public class Values {
     public float calculate(Float firstValue, Float secondValue, String operation){
         float result = 0.0f;
         try{
-        switch (operation){
-            case "÷":
-                result = firstValue/secondValue;
-                break;
-            case "x":
-                result = firstValue*secondValue;
-                break;
-            case "-":
-                result = firstValue-secondValue;
-                break;
-            case "+":
-                result = firstValue+secondValue;
-                break;
-            }
+            result = switch (operation) {
+                case "÷" -> firstValue / secondValue;
+                case "x" -> firstValue * secondValue;
+                case "-" -> firstValue - secondValue;
+                case "+" -> firstValue + secondValue;
+                default -> result;
+            };
         }
         catch(ArithmeticException e){
             System.out.println("Error: " + e.getMessage());
