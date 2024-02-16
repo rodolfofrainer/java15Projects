@@ -11,9 +11,8 @@ public class Calculator {
     final static int WIDTH = 425 + PADDING*2;
     final static int HEIGHT = 650 + PADDING*3;
     final static int GRID_SIZE = 100;
+    private static Values values = new Values();
 
-    static float[] operationValues= {0.0f, 1.0f};
-    char operationOperator;
 
     public static void main(String[] args) {
         // create frame and text area
@@ -36,11 +35,29 @@ public class Calculator {
 
     private static void getButtonAction(Button buttonPressed, JTextArea textArea) {
         List<String> operators = Arrays.asList("÷", "x","-","+");
-        if(operators.contains(buttonPressed.getText())){
-            operationValues[0] = Float.parseFloat(textArea.getText());
-            System.out.println(operationValues[0]);
+
+        String equalSign = "=";
+
+        if(!equalSign.equals(buttonPressed.getText())){
+            textArea.append(buttonPressed.getText());
+        } else{
+            System.out.println(values.getFirstValue());
+            System.out.println(values.getSecondValue());
+            System.out.println(values.getOperation());
+            float newFirstValue = values.calculate(values.firstValue, values.secondValue, values.operation);
+            values.setFirstValue(newFirstValue);
+            System.out.println(values.getFirstValue());
+            textArea.setText(String.valueOf(values.getFirstValue()));
         }
-        textArea.append(buttonPressed.getText());
+        if(operators.contains(buttonPressed.getText())){
+            values.setOperation(buttonPressed.getText());
+            textArea.setText("");
+        } else if (Float.isNaN(values.firstValue)) {
+            values.setFirstValue(Float.parseFloat(textArea.getText()));
+        } else{
+            values.setSecondValue(Float.parseFloat(textArea.getText()));
+        }
+
     }
 
 
