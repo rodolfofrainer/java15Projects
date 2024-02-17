@@ -15,4 +15,14 @@ public class toDoList {
         return frame;
     }
 
+
+    //################## PSEUDOCODE
+
+    // add db connection
+
+    // add button to add new task
+
+    // add task (with remove and edit button)
+
+    // possible authentication (?)
 }
