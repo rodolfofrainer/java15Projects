@@ -11,12 +11,14 @@ public class toDoList {
     public static JFrame createFrame(){
         JFrame frame = new JFrame("To-do List");
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        frame.setSize(500,500);
         frame.setVisible(true);
         return frame;
     }
-
+ 
 
     //################## PSEUDOCODE
+    // possible authentication (?)
 
     // add db connection
 
@@ -24,5 +26,4 @@ public class toDoList {
 
     // add task (with remove and edit button)
 
-    // possible authentication (?)
 }
