@@ -6,6 +6,9 @@ import java.util.List;
 public class fibonacci {
 
     public static void Fibonacci(int interations){
+        // returns a list of all numbers of the fibonacci number until X position
+        //Input -> Integer
+        // Output -> Void
         List<Integer> fibonacciList = new ArrayList<>();
         fibonacciList.add(0);
         fibonacciList.add(1);
@@ -20,7 +23,18 @@ public class fibonacci {
             }
         }
     }
+
+    public static Integer specificFibonacciPos(int x){
+        // Returns the number in the specific position of the fibonacci number
+        //Input -> Integer
+        //Output -> Integer
+        if (x<=2){
+            return 1;
+        }
+        return specificFibonacciPos(x-1) + specificFibonacciPos(x-2);
+    }
     public static void main(String[] args) {
-        Fibonacci(20);
+//        Fibonacci(20);
+        System.out.println(specificFibonacciPos(17));
     }
 }
