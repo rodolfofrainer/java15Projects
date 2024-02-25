@@ -19,6 +19,6 @@ public class Button extends JButton {
         Font font = getFont();
         setFont(new Font(font.getFontName(),font.getStyle(), 20));
 
-        setBounds(x,y, this.length, this.height);
+        setBounds(x,y+toDoList.PADDING, this.length, this.height);
     }
 }
