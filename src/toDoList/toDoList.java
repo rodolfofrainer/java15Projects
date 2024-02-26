@@ -13,11 +13,11 @@ public class toDoList {
 
 
     // add button to add new task
-        Button addTask = new Button("Add a Task", 50, 150,(FRAME_WIDTH+100)/3, 0);
+        Button addTask = new Button("Add a Task", 50, 150,(FRAME_WIDTH-150)/2, 0);
         addTask.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                NewWindow newTaskWindow = new NewWindow();
+                newTaskWindow newTaskWindow = new newTaskWindow();
                 newTaskWindow.setVisible(true);
             }
         });
@@ -33,21 +33,6 @@ public class toDoList {
         return frame;
     }
 
-    static class NewWindow extends JFrame{
-        public NewWindow() {
-            setTitle("New Window");
-            setSize(300, 200);
-
-            JTextArea label = new JTextArea();
-
-            JPanel panel = new JPanel();
-            panel.add(label);
-            add(panel);
-
-            setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
-            setLocationRelativeTo(null);
-        }
-    }
 
 
     //################## PSEUDOCODE
