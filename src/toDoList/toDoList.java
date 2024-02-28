@@ -25,12 +25,9 @@ public class toDoList {
 
     // add button to add new task
         Button addTaskButton = new Button("Add a Task", 50, 150,(FRAME_WIDTH-150)/2, 0);
-        addTaskButton.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                newTaskWindow newTaskWindow = new newTaskWindow();
-                newTaskWindow.setVisible(true);
-            }
+        addTaskButton.addActionListener(e -> {
+            newTaskWindow newTaskWindow = new newTaskWindow();
+            newTaskWindow.setVisible(true);
         });
         frame.add(addTaskButton);
 
@@ -46,7 +43,7 @@ public class toDoList {
                 }
             }
         } catch (IOException e) {
-            e.printStackTrace();
+            System.out.println(e.getMessage());
         }
         return linesList.toArray(new String[0]);
     }
