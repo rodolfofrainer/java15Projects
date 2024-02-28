@@ -33,6 +33,9 @@ public class Task {
 
 
     public Task(int id, String description){
-        Date dateCreated = new Date();
+
+        this.id = id;
+        this.description = description;
+        this.dateCreated = new Date();
     }
 }
