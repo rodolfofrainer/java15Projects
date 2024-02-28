@@ -1,8 +1,8 @@
 package toDoList;
 
 import javax.swing.*;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
+import javax.swing.text.StyledDocument;
+import java.awt.*;
 import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.IOException;
@@ -17,20 +17,29 @@ public class toDoList {
     public static void main(String[] args) {
         JFrame frame = createFrame();
 
-        List<String> listItems = Arrays.stream(readLines("listOfIdeas.txt")).toList();
+        JPanel tasksPanel = new JPanel();
+        tasksPanel.setLayout(new BoxLayout(tasksPanel, BoxLayout.Y_AXIS));
+
+        List<String> listItems = Arrays.asList(readLines("listOfIdeas.txt"));
         for (int i = 0; i < listItems.size(); i++) {
-            Task newTask = new Task(i+1, listItems.get(i));
-            System.out.println(newTask.getDescription());
+            Task newTask = new Task(i + 1, listItems.get(i));
+            JTextPane textPane = new JTextPane();
+            textPane.setText(newTask.getId()+"- "+newTask.getDescription());
+            tasksPanel.add(textPane);
         }
 
-    // add button to add new task
+        frame.add(tasksPanel, BorderLayout.CENTER);
+
+
         Button addTaskButton = new Button("Add a Task", 50, 150,(FRAME_WIDTH-150)/2, 0);
         addTaskButton.addActionListener(e -> {
             newTaskWindow newTaskWindow = new newTaskWindow();
             newTaskWindow.setVisible(true);
         });
-        frame.add(addTaskButton);
+        frame.add(addTaskButton, BorderLayout.SOUTH);
 
+        frame.pack();
+        frame.setVisible(true);
     }
 
     public static String[] readLines(String filename) {
