@@ -1,29 +1,29 @@
-1. Hello World Program: Start with the classic "Hello, World!" program to get familiar with the syntax and structure of a Java program.
+Hello World Program: Start with the classic "Hello, World!" program to get familiar with the syntax and structure of a Java program.
 
-2. Simple Calculator: Create a program that takes two numbers as input and performs basic arithmetic operations (addition, subtraction, multiplication, division) on them.
+Simple Calculator: Create a program that takes two numbers as input and performs basic arithmetic operations (addition, subtraction, multiplication, division) on them.
 
-3. Fibonacci Sequence: Write a program to generate the Fibonacci sequence up to a specified number of terms.
+Fibonacci Sequence: Write a program to generate the Fibonacci sequence up to a specified number of terms.
 
-4. Factorial Calculator: Develop a program that calculates the factorial of a given number.
+Factorial Calculator: Develop a program that calculates the factorial of a given number.
 
-5. Guessing Game: Implement a simple number guessing game where the computer generates a random number and the user tries to guess it.
+Guessing Game: Implement a simple number guessing game where the computer generates a random number and the user tries to guess it.
 
-6. Palindrome Checker: Create a program that checks whether a given string is a palindrome or not (reads the same backward as forward).
+Palindrome Checker: Create a program that checks whether a given string is a palindrome or not (reads the same backward as forward).
 
-7. Simple To-Do List: Build a basic to-do list application where users can add, delete, and view tasks.
+Simple To-Do List: Build a basic to-do list application where users can add, delete, and view tasks.
 
-8. Temperature Converter: Write a program that converts temperatures between Fahrenheit and Celsius.
+Temperature Converter: Write a program that converts temperatures between Fahrenheit and Celsius.
 
-9. Simple ATM Simulator: Design a simple ATM simulator that allows users to check balance, withdraw money, and deposit money.
+Simple ATM Simulator: Design a simple ATM simulator that allows users to check balance, withdraw money, and deposit money.
 
-10. Prime Number Checker: Develop a program that checks whether a given number is prime or not.
+Prime Number Checker: Develop a program that checks whether a given number is prime or not.
 
-11. Word Counter: Create a program that counts the number of words in a given sentence or paragraph.
+Word Counter: Create a program that counts the number of words in a given sentence or paragraph.
 
-12. Binary to Decimal Converter: Write a program that converts a binary number to its decimal equivalent.
+Binary to Decimal Converter: Write a program that converts a binary number to its decimal equivalent.
 
-13. Array Operations: Practice basic array operations such as creating arrays, accessing elements, and performing simple operations like sum or finding the maximum element.
+Array Operations: Practice basic array operations such as creating arrays, accessing elements, and performing simple operations like sum or finding the maximum element.
 
-14. String Manipulation: Practice string manipulation by writing programs to reverse a string, find the length of a string, or concatenate two strings.
+String Manipulation: Practice string manipulation by writing programs to reverse a string, find the length of a string, or concatenate two strings.
 
-15. Simple GUI Application: Try creating a simple graphical user interface (GUI) application using Java Swing or JavaFX, such as a calculator or a simple text editor.
+Simple GUI Application: Try creating a simple graphical user interface (GUI) application using Java Swing or JavaFX, such as a calculator or a simple text editor.

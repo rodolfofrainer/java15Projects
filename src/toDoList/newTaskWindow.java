@@ -5,6 +5,8 @@ import javax.swing.text.SimpleAttributeSet;
 import javax.swing.text.StyleConstants;
 import javax.swing.text.StyledDocument;
 import java.awt.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 
 public class newTaskWindow extends JFrame {
     public newTaskWindow() {
@@ -27,6 +29,14 @@ public class newTaskWindow extends JFrame {
         setLocationRelativeTo(null);
 
         Button addTaskButton = new Button("Add task", width, width, width, height);
+
+        addTaskButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+
+            }
+        });
+
         panel.add(addTaskButton, BorderLayout.SOUTH);
 
         add(panel);
