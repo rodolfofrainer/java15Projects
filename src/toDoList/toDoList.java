@@ -1,7 +1,6 @@
 package toDoList;
 
 import javax.swing.*;
-import javax.swing.text.StyledDocument;
 import java.awt.*;
 import java.io.BufferedReader;
 import java.io.FileReader;
@@ -24,6 +23,7 @@ public class toDoList {
         for (int i = 0; i < listItems.size(); i++) {
             Task newTask = new Task(i + 1, listItems.get(i));
             JTextPane textPane = new JTextPane();
+            textPane.setFont(new Font(textPane.getFont().getFontName(), textPane.getFont().getStyle(), 18));
             textPane.setText(newTask.getId()+"- "+newTask.getDescription());
             tasksPanel.add(textPane);
         }
