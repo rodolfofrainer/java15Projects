@@ -1,4 +1,4 @@
-Hello World Program: Start with the classic "Hello, World!" program to get familiar with the syntax and structure of a Java program.
+Hello World Program: Start with the classic "Hello, World!" program to get familiar with the syntax and structure of a Java program. <completed>
 
 Simple Calculator: Create a program that takes two numbers as input and performs basic arithmetic operations (addition, subtraction, multiplication, division) on them.
 

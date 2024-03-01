@@ -1,9 +1,9 @@
 package toDoList;
 import java.util.Date;
 public class Task {
-    int id;
-    String description;
-    long dateCreated;
+    private int id;
+    private String description;
+    private long dateCreated;
 
     public int getId() {
         return id;

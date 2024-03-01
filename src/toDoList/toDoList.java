@@ -1,6 +1,9 @@
 package toDoList;
 
 import javax.swing.*;
+import javax.swing.text.SimpleAttributeSet;
+import javax.swing.text.StyleConstants;
+import javax.swing.text.StyledDocument;
 import java.awt.*;
 import java.io.BufferedReader;
 import java.io.FileReader;
@@ -14,6 +17,7 @@ public class toDoList {
     static final int FRAME_HEIGHT = 500;
     static final int PADDING = 5;
     public static void main(String[] args) {
+        JDBC.connection();
         JFrame frame = createFrame();
 
         JPanel tasksPanel = new JPanel();
@@ -24,7 +28,17 @@ public class toDoList {
             Task newTask = new Task(i + 1, listItems.get(i));
             JTextPane textPane = new JTextPane();
             textPane.setFont(new Font(textPane.getFont().getFontName(), textPane.getFont().getStyle(), 18));
+            if (newTask.getDescription().contains("<completed>")){
+                String description = newTask.getDescription().replace("<completed>", "");
+                textPane.setText(newTask.getId() + "- " + description);
+
+                StyledDocument doc = textPane.getStyledDocument();
+                SimpleAttributeSet attributes = new SimpleAttributeSet();
+                StyleConstants.setStrikeThrough(attributes, true);
+                doc.setCharacterAttributes(0, description.length(), attributes, false);
+            } else{
             textPane.setText(newTask.getId()+"- "+newTask.getDescription());
+            }
             tasksPanel.add(textPane);
         }
 
@@ -64,5 +78,7 @@ public class toDoList {
         frame.setVisible(true);
         return frame;
     }
+
+
 
 }
