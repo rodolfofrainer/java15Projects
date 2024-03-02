@@ -14,7 +14,7 @@ public class JDBC {
             System.out.println("Connected to the database!");
         } catch (Exception e) {
             System.out.println("Connection failed!");
-            e.printStackTrace();
+            System.out.println(e.getMessage());
         }
     }
 }
