@@ -23,24 +23,6 @@ public class toDoList {
         JPanel tasksPanel = new JPanel();
         tasksPanel.setLayout(new BoxLayout(tasksPanel, BoxLayout.Y_AXIS));
 
-        List<String> listItems = Arrays.asList(readLines("listOfIdeas.txt"));
-        for (int i = 0; i < listItems.size(); i++) {
-            Task newTask = new Task(i + 1, listItems.get(i));
-            JTextPane textPane = new JTextPane();
-            textPane.setFont(new Font(textPane.getFont().getFontName(), textPane.getFont().getStyle(), 18));
-            if (newTask.getDescription().contains("<completed>")){
-                String description = newTask.getDescription().replace("<completed>", "");
-                textPane.setText(newTask.getId() + "- " + description);
-
-                StyledDocument doc = textPane.getStyledDocument();
-                SimpleAttributeSet attributes = new SimpleAttributeSet();
-                StyleConstants.setStrikeThrough(attributes, true);
-                doc.setCharacterAttributes(0, description.length(), attributes, false);
-            } else{
-            textPane.setText(newTask.getId()+"- "+newTask.getDescription());
-            }
-            tasksPanel.add(textPane);
-        }
 
         frame.add(tasksPanel, BorderLayout.CENTER);
 
@@ -78,7 +60,4 @@ public class toDoList {
         frame.setVisible(true);
         return frame;
     }
-
-
-
 }
