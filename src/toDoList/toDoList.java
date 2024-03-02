@@ -38,20 +38,20 @@ public class toDoList {
         frame.setVisible(true);
     }
 
-    public static String[] readLines(String filename) {
-        List<String> linesList = new ArrayList<>();
-        try (BufferedReader reader = new BufferedReader(new FileReader(filename))) {
-            String line;
-            while ((line = reader.readLine()) != null) {
-                if (!line.trim().isEmpty()) {
-                    linesList.add(line);
-                }
-            }
-        } catch (IOException e) {
-            System.out.println(e.getMessage());
-        }
-        return linesList.toArray(new String[0]);
-    }
+//    public static String[] readLines(String filename) {
+//        List<String> linesList = new ArrayList<>();
+//        try (BufferedReader reader = new BufferedReader(new FileReader(filename))) {
+//            String line;
+//            while ((line = reader.readLine()) != null) {
+//                if (!line.trim().isEmpty()) {
+//                    linesList.add(line);
+//                }
+//            }
+//        } catch (IOException e) {
+//            System.out.println(e.getMessage());
+//        }
+//        return linesList.toArray(new String[0]);
+//    }
 
     public static JFrame createFrame(){
         JFrame frame = new JFrame("To-do List");

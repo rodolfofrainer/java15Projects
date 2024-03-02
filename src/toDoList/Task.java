@@ -1,10 +1,10 @@
 package toDoList;
 import java.util.Date;
 public class Task {
-    private int id;
+    private final int id;
     private boolean completed;
-    private String dateCreated;
-    private String description;
+    private final String dateCreated;
+    private final String description;
 
     public int getId() {
         return id;
