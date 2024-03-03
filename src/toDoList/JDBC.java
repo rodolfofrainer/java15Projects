@@ -1,10 +1,11 @@
 package toDoList;
 
-import java.sql.Connection;
-import java.sql.Date;
-import java.sql.DriverManager;
-import java.sql.PreparedStatement;
+import java.sql.*;
 import java.time.LocalDate;
+import java.util.ArrayList;
+import java.util.List;
+
+import static toDoList.ReadFile.returnItems;
 
 public class JDBC {
     public static Connection connection() {
@@ -23,7 +24,8 @@ public class JDBC {
         return conn;
     }
 
-    public static void injectItem(Connection conn, int id,String description){
+    public static void injectItem(int id, String description){
+        Connection conn = connection();
         LocalDate currentDate = LocalDate.now();
         Date sqlDate = Date.valueOf(currentDate);
         String InsertTask = "INSERT INTO tasks (id, completed, dateCreated, description) VALUES(?,?,?,?)";
@@ -44,6 +46,32 @@ public class JDBC {
             System.out.println("Error inserting task: " + e.getMessage());
         }
 
+    }
+
+    public static void populateDB(String filename) {
+        List<String> items = returnItems(filename);
+        for (int i = 0; i < items.size(); i++) {
+            injectItem(i, items.get(i));
+        }
+    }
+
+    public static List<String> readItems() {
+        Connection conn = connection();
+        List<String> items = new ArrayList<>();
+        String sql = "SELECT description FROM tasks";
+
+        try (PreparedStatement preparedStatement = conn.prepareStatement(sql)) {
+            ResultSet resultSet = preparedStatement.executeQuery();
+
+            while (resultSet.next()) {
+                String itemName = resultSet.getString("description");
+                items.add(itemName);
+            }
+        } catch (Exception e) {
+            System.out.println("Error reading items from database: " + e.getMessage());
+        }
+
+        return items;
     }
 
 }
