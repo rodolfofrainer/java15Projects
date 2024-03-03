@@ -10,13 +10,16 @@ public class toDoList {
     static final int FRAME_HEIGHT = 500;
     static final int PADDING = 5;
     public static void main(String[] args) {
-        // test item injection
+        // item injection
        // JDBC.injectItem(conn, 1, "test");
-//        JDBC.populateDB("listOfIdeas.txt");
-        readItems();
-        JFrame frame = createFrame();
 
-        System.out.println(readItems());
+        //populate DB with all items in txt file
+//        JDBC.populateDB("listOfIdeas.txt");
+
+        // read all items in DB and return as a list
+        readItems();
+
+        JFrame frame = createFrame();
 
         JPanel tasksPanel = new JPanel();
         tasksPanel.setLayout(new BoxLayout(tasksPanel, BoxLayout.Y_AXIS));
