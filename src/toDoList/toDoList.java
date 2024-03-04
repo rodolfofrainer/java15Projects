@@ -39,8 +39,9 @@ public class toDoList {
 
         Button addTaskButton = new Button("Add a Task", 50, 150,(FRAME_WIDTH-150)/2, 0);
         addTaskButton.addActionListener(e -> {
-            newTaskWindow newTaskWindow = new newTaskWindow();
+            NewTaskWindow newTaskWindow = new NewTaskWindow();
             newTaskWindow.setVisible(true);
+            newTaskWindow.dispose();
         });
         frame.add(addTaskButton, BorderLayout.SOUTH);
 

@@ -106,4 +106,15 @@ public class JDBC {
             System.out.println("Error updating task completion status in the database: " + ex.getMessage());
         }
     }
+
+    public static int getMaxIdFromDatabase() {
+        try (Connection connection = establishConnection();
+             PreparedStatement statement = connection.prepareStatement("SELECT MAX(id) AS max_id FROM tasks");
+             ResultSet resultSet = statement.executeQuery()) {
+            return resultSet.next() ? resultSet.getInt("max_id") : 0;
+        } catch (SQLException ex) {
+            System.out.println("Error retrieving max ID from database: " + ex.getMessage());
+            return 0;
+        }
+    }
 }
