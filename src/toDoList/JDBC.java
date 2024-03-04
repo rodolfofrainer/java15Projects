@@ -8,7 +8,7 @@ import java.util.List;
 import static toDoList.ReadFile.returnItems;
 
 public class JDBC {
-    public static Connection connection() {
+    public static Connection establishConnection() {
         JdbcConfig config = new JdbcConfig();
         String username = config.getUsername();
         String password = config.getPassword();
@@ -25,7 +25,7 @@ public class JDBC {
     }
 
     public static void injectItem(int id, String description){
-        Connection conn = connection();
+        Connection conn = establishConnection();
         LocalDate currentDate = LocalDate.now();
         Date sqlDate = Date.valueOf(currentDate);
         String InsertTask = "INSERT INTO tasks (id, completed, dateCreated, description) VALUES(?,?,?,?)";
@@ -55,23 +55,29 @@ public class JDBC {
         }
     }
 
-    public static List<String> readItems() {
-        Connection conn = connection();
-        List<String> items = new ArrayList<>();
-        String sql = "SELECT description FROM tasks";
+    public static List<Task> getItemsFromDatabase() {
+        Connection connection = establishConnection();
+        List<Task> tasks = new ArrayList<>();
+        String query = "SELECT id, completed, dateCreated, description FROM tasks";
 
-        try (PreparedStatement preparedStatement = conn.prepareStatement(sql)) {
-            ResultSet resultSet = preparedStatement.executeQuery();
+        try (PreparedStatement statement = connection.prepareStatement(query)) {
+            ResultSet resultSet = statement.executeQuery();
 
             while (resultSet.next()) {
-                String itemName = resultSet.getString("description");
-                items.add(itemName);
+                int id = resultSet.getInt("id");
+                boolean completed = resultSet.getBoolean("completed");
+                String dateCreated = resultSet.getString("dateCreated");
+                String description = resultSet.getString("description");
+
+                Task task = new Task(id, completed, description, dateCreated);
+                task.setCompleted(completed);
+                tasks.add(task);
             }
-        } catch (Exception e) {
-            System.out.println("Error reading items from database: " + e.getMessage());
+        } catch (SQLException ex) {
+            System.out.println("Error reading items from database: " + ex.getMessage());
         }
 
-        return items;
+        return tasks;
     }
 
 }

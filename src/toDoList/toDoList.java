@@ -2,8 +2,10 @@ package toDoList;
 
 import javax.swing.*;
 import java.awt.*;
+import java.util.List;
 
-import static toDoList.JDBC.readItems;
+
+import static toDoList.JDBC.getItemsFromDatabase;
 
 public class toDoList {
     static final int FRAME_WIDTH = 500;
@@ -16,15 +18,21 @@ public class toDoList {
         //populate DB with all items in txt file
 //        JDBC.populateDB("listOfIdeas.txt");
 
-        // read all items in DB and return as a list
-        readItems();
-
         JFrame frame = createFrame();
 
         JPanel tasksPanel = new JPanel();
         tasksPanel.setLayout(new BoxLayout(tasksPanel, BoxLayout.Y_AXIS));
 
         frame.add(tasksPanel, BorderLayout.CENTER);
+
+        // read all items in DB and return as a list
+        List<Task> items = getItemsFromDatabase();
+        for (Task currentItem : items) {
+            TaskPanel taskPanel = new TaskPanel(currentItem);
+            taskPanel.getCheckBox().setSelected(currentItem.getCompleted());
+            tasksPanel.add(taskPanel);
+        }
+
 
         Button addTaskButton = new Button("Add a Task", 50, 150,(FRAME_WIDTH-150)/2, 0);
         addTaskButton.addActionListener(e -> {

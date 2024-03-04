@@ -22,9 +22,9 @@ public class Task {
         return description;
     }
 
-    public Task(int id, String description,String dateCreated){
+    public Task(int id,boolean completed, String description,String dateCreated){
         this.id = id;
-        this.completed = false;
+        this.completed = completed;
         this.description = description;
         this.dateCreated = dateCreated;
     }
