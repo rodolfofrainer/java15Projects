@@ -7,6 +7,7 @@ import java.util.Properties;
 public class JdbcConfig {
     private String username;
     private String password;
+    private String dbName;
 
     public JdbcConfig() {
         try (FileInputStream input = new FileInputStream("config.properties")) {
@@ -14,8 +15,9 @@ public class JdbcConfig {
             properties.load(input);
             username = properties.getProperty("db.username");
             password = properties.getProperty("db.password");
+            dbName = properties.getProperty("db.name");
         } catch (IOException e) {
-            e.printStackTrace();
+            System.out.println("Error loading properties file:"+ e.getMessage());
         }
     }
 
@@ -25,5 +27,9 @@ public class JdbcConfig {
 
     public String getPassword() {
         return password;
+    }
+
+    public String getDbName() {
+        return dbName;
     }
 }

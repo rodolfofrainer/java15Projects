@@ -4,7 +4,6 @@ import javax.swing.*;
 import java.awt.*;
 import java.util.List;
 
-
 import static toDoList.JDBC.getItemsFromDatabase;
 
 public class toDoList {
@@ -31,7 +30,11 @@ public class toDoList {
             TaskPanel taskPanel = new TaskPanel(currentItem);
             taskPanel.getCheckBox().setSelected(currentItem.getCompleted());
             tasksPanel.add(taskPanel);
+
+            taskPanel.getCheckBox().addItemListener(e -> currentItem.setCompleted(currentItem.getId(), taskPanel.getCheckBox().isSelected()));
         }
+
+
 
 
         Button addTaskButton = new Button("Add a Task", 50, 150,(FRAME_WIDTH-150)/2, 0);

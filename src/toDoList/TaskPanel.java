@@ -4,36 +4,22 @@ import javax.swing.*;
 import java.awt.*;
 
 public class TaskPanel extends JPanel {
-    private final Task task;
     private final JCheckBox checkBox;
-    private final JLabel descriptionLabel;
 
     public TaskPanel(Task task) {
-        this.task = task;
         checkBox = new JCheckBox();
-        descriptionLabel = new JLabel(task.getDescription());
+        JLabel descriptionLabel = new JLabel(task.getDescription());
+        JLabel taskId = new JLabel(String.valueOf(task.getId())+": " );
 
         setLayout(new BorderLayout());
-        add(checkBox, BorderLayout.WEST);
+        add(taskId, BorderLayout.WEST);
+        add(checkBox, BorderLayout.EAST);
         add(descriptionLabel, BorderLayout.CENTER);
 
         setBorder(BorderFactory.createLineBorder(Color.BLACK));
     }
 
-    public Task getTask() {
-        return task;
-    }
-
     public JCheckBox getCheckBox() {
         return checkBox;
-    }
-    private Font descriptionFont;
-
-    public Font getDescriptionFont() {
-        return descriptionFont;
-    }
-
-    public void setDescriptionFont(Font descriptionFont) {
-        this.descriptionFont = descriptionFont;
     }
 }

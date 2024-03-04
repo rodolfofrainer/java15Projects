@@ -1,5 +1,5 @@
 package toDoList;
-import java.util.Date;
+
 public class Task {
     private final int id;
     private boolean completed;
@@ -12,11 +12,9 @@ public class Task {
     public boolean getCompleted() {
         return completed;
     }
-    public void setCompleted(boolean completed) {
+    public void setCompleted(int id, boolean completed) {
         this.completed = completed;
-    }
-    public String getDateCreated() {
-        return dateCreated;
+        JDBC.updateCompletedStatusInDatabase(id, completed);
     }
     public String getDescription() {
         return description;

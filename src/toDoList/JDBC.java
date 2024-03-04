@@ -8,44 +8,48 @@ import java.util.List;
 import static toDoList.ReadFile.returnItems;
 
 public class JDBC {
+    private static final String URL = "jdbc:mysql://localhost:3306/";
+
     public static Connection establishConnection() {
         JdbcConfig config = new JdbcConfig();
+        String dbName = config.getDbName();
         String username = config.getUsername();
         String password = config.getPassword();
-        String url = "jdbc:mysql://localhost:3306/tasks";
         Connection conn = null;
         try {
-            System.out.println("Connected to data base");
-            conn = DriverManager.getConnection(url, username, password);
-        } catch (Exception e) {
+            conn = DriverManager.getConnection(URL+config.getDbName(), username, password);
+        } catch (SQLException e) {
             System.out.println("Connection failed!");
             System.out.println(e.getMessage());
         }
         return conn;
     }
 
-    public static void injectItem(int id, String description){
-        Connection conn = establishConnection();
-        LocalDate currentDate = LocalDate.now();
-        Date sqlDate = Date.valueOf(currentDate);
-        String InsertTask = "INSERT INTO tasks (id, completed, dateCreated, description) VALUES(?,?,?,?)";
-        try (PreparedStatement preparedStatement = conn.prepareStatement(InsertTask)) {
+    public static void injectItem(int id, String description) {
+        try (Connection conn = establishConnection()) {
+            if (conn != null) {
+                LocalDate currentDate = LocalDate.now();
+                Date sqlDate = Date.valueOf(currentDate);
+                String insertTask = "INSERT INTO tasks (id, completed, dateCreated, description) VALUES(?,?,?,?)";
+                try (PreparedStatement preparedStatement = conn.prepareStatement(insertTask)) {
+                    preparedStatement.setInt(1, id);
+                    preparedStatement.setBoolean(2, false);
+                    preparedStatement.setDate(3, sqlDate);
+                    preparedStatement.setString(4, description);
 
-            preparedStatement.setString(1, String.valueOf(id));
-            preparedStatement.setString(2, "0");
-            preparedStatement.setDate(3, sqlDate);
-            preparedStatement.setString(4, description);
-
-            int rowsAffected = preparedStatement.executeUpdate();
-            if (rowsAffected > 0) {
-                System.out.println("Task inserted successfully!");
+                    int rowsAffected = preparedStatement.executeUpdate();
+                    if (rowsAffected > 0) {
+                        System.out.println("Task inserted successfully!");
+                    } else {
+                        System.out.println("Failed to insert task.");
+                    }
+                }
             } else {
-                System.out.println("Failed to insert task.");
+                System.out.println("Failed to establish connection to the database.");
             }
-        } catch (Exception e) {
+        } catch (SQLException e) {
             System.out.println("Error inserting task: " + e.getMessage());
         }
-
     }
 
     public static void populateDB(String filename) {
@@ -56,28 +60,50 @@ public class JDBC {
     }
 
     public static List<Task> getItemsFromDatabase() {
-        Connection connection = establishConnection();
         List<Task> tasks = new ArrayList<>();
-        String query = "SELECT id, completed, dateCreated, description FROM tasks";
+        try (Connection connection = establishConnection()) {
+            if (connection != null) {
+                String query = "SELECT id, completed, dateCreated, description FROM tasks";
+                try (PreparedStatement statement = connection.prepareStatement(query)) {
+                    ResultSet resultSet = statement.executeQuery();
+                    while (resultSet.next()) {
+                        int id = resultSet.getInt("id");
+                        boolean completed = resultSet.getBoolean("completed");
+                        Date dateCreated = resultSet.getDate("dateCreated");
+                        String description = resultSet.getString("description");
 
-        try (PreparedStatement statement = connection.prepareStatement(query)) {
-            ResultSet resultSet = statement.executeQuery();
-
-            while (resultSet.next()) {
-                int id = resultSet.getInt("id");
-                boolean completed = resultSet.getBoolean("completed");
-                String dateCreated = resultSet.getString("dateCreated");
-                String description = resultSet.getString("description");
-
-                Task task = new Task(id, completed, description, dateCreated);
-                task.setCompleted(completed);
-                tasks.add(task);
+                        Task task = new Task(id, completed, description, dateCreated.toString());
+                        tasks.add(task);
+                    }
+                }
+            } else {
+                System.out.println("Failed to establish connection to the database.");
             }
         } catch (SQLException ex) {
             System.out.println("Error reading items from database: " + ex.getMessage());
         }
-
         return tasks;
     }
 
+    public static void updateCompletedStatusInDatabase(int id, boolean completed) {
+        try (Connection connection = establishConnection()) {
+            if (connection != null) {
+                String updateQuery = "UPDATE tasks SET completed = ? WHERE id = ?";
+                try (PreparedStatement preparedStatement = connection.prepareStatement(updateQuery)) {
+                    preparedStatement.setBoolean(1, completed);
+                    preparedStatement.setInt(2, id);
+                    int rowsAffected = preparedStatement.executeUpdate();
+                    if (rowsAffected > 0) {
+                        System.out.println("Task completion status updated successfully in the database!");
+                    } else {
+                        System.out.println("Failed to update task completion status in the database.");
+                    }
+                }
+            } else {
+                System.out.println("Failed to establish connection to the database.");
+            }
+        } catch (SQLException ex) {
+            System.out.println("Error updating task completion status in the database: " + ex.getMessage());
+        }
+    }
 }
