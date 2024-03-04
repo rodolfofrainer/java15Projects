@@ -17,7 +17,7 @@ public class JDBC {
         String password = config.getPassword();
         Connection conn = null;
         try {
-            conn = DriverManager.getConnection(URL+config.getDbName(), username, password);
+            conn = DriverManager.getConnection(URL+dbName, username, password);
         } catch (SQLException e) {
             System.out.println("Connection failed!");
             System.out.println(e.getMessage());
