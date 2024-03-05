@@ -42,11 +42,11 @@ public class toDoList {
         frame.setVisible(true);
     }
 
-    private static void populateJPanel(JPanel tasksPanel) {
-        tasksPanel.removeAll(); // Clear existing components
+    public static void populateJPanel(JPanel tasksPanel) {
+        tasksPanel.removeAll();
         List<Task> items = getItemsFromDatabase();
         for (Task currentItem : items) {
-            TaskPanel taskPanel = new TaskPanel(currentItem);
+            TaskPanel taskPanel = new TaskPanel(currentItem, tasksPanel);
             taskPanel.getCheckBox().setSelected(currentItem.getCompleted());
             tasksPanel.add(taskPanel);
         }

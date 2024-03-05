@@ -117,4 +117,20 @@ public class JDBC {
             return 0;
         }
     }
+
+    public static void deleteSingleItem(Task task) {
+        try (Connection connection = establishConnection();
+             PreparedStatement statement = connection.prepareStatement("DELETE FROM tasks WHERE id = ?")) {
+            statement.setInt(1, task.getId());
+            int rowsAffected = statement.executeUpdate();
+            if (rowsAffected > 0) {
+                System.out.println("Task with ID " + task.getId() + " deleted successfully.");
+            } else {
+                System.out.println("Task with ID " + task.getId() + " not found.");
+            }
+        } catch (SQLException ex) {
+            System.out.println("Error deleting task from database: " + ex.getMessage());
+        }
+    }
+
 }
