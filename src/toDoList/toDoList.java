@@ -25,16 +25,7 @@ public class toDoList {
         frame.add(tasksPanel, BorderLayout.CENTER);
 
         // read all items in DB and return as a list
-        List<Task> items = getItemsFromDatabase();
-        for (Task currentItem : items) {
-            TaskPanel taskPanel = new TaskPanel(currentItem);
-            taskPanel.getCheckBox().setSelected(currentItem.getCompleted());
-            tasksPanel.add(taskPanel);
-
-            taskPanel.getCheckBox().addItemListener(e -> currentItem.setCompleted(currentItem.getId(), taskPanel.getCheckBox().isSelected()));
-        }
-
-
+        populateJPanel(tasksPanel);
 
 
         Button addTaskButton = new Button("Add a Task", 50, 150,(FRAME_WIDTH-150)/2, 0);
@@ -42,6 +33,8 @@ public class toDoList {
             NewTaskWindow newTaskWindow = new NewTaskWindow();
             newTaskWindow.setVisible(true);
             newTaskWindow.dispose();
+            populateJPanel(tasksPanel);
+            frame.pack();
         });
         frame.add(addTaskButton, BorderLayout.SOUTH);
 
@@ -49,7 +42,15 @@ public class toDoList {
         frame.setVisible(true);
     }
 
-
+    private static void populateJPanel(JPanel tasksPanel) {
+        tasksPanel.removeAll(); // Clear existing components
+        List<Task> items = getItemsFromDatabase();
+        for (Task currentItem : items) {
+            TaskPanel taskPanel = new TaskPanel(currentItem);
+            taskPanel.getCheckBox().setSelected(currentItem.getCompleted());
+            tasksPanel.add(taskPanel);
+        }
+    }
 
 
     public static JFrame createFrame(){
