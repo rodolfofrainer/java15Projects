@@ -41,6 +41,14 @@ public class TaskPanel extends JPanel {
             tasksPanel.repaint();
         });
 
+        checkBox.addActionListener(e->{
+            task.setCompleted(task.getId(),checkBox.isSelected());
+            tasksPanel.removeAll();
+            populateJPanel(tasksPanel);
+            tasksPanel.revalidate();
+            tasksPanel.repaint();
+        });
+
     }
 
     public JCheckBox getCheckBox() {
