@@ -3,7 +3,7 @@ package AtmSimulator;
 import java.util.Scanner;
 
 public class Atm {
-    float total = 0;
+    float total;
 
 
 
