@@ -1,10 +1,6 @@
 package temperatureConverter;
 
-import org.junit.Test;
-
 import java.util.Scanner;
-
-import static org.junit.Assert.assertEquals;
 
 public class TemperatureConverter {
     public static void main(String[] args) {
