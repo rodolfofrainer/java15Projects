@@ -1,4 +1,4 @@
-package StringConcatnator;
+package StringConcatinator;
 
 import java.util.Scanner;
 
