@@ -13,3 +13,5 @@ Binary to Decimal Converter: Write a program that converts a binary number to it
 Array Operations: Practice basic array operations such as creating arrays, accessing elements, and performing simple operations like sum or finding the maximum element.
 String Manipulation: Practice string manipulation by writing programs to reverse a string, find the length of a string, or concatenate two strings.
 Simple GUI Application: Try creating a simple graphical user interface (GUI) application using Java Swing or JavaFX, such as a calculator or a simple text editor.
+
+*COMPLETE*
